@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+	<canvas height="1000" width="1000" id='example'>Обновите браузер</canvas> <br>
+	<button>
+	<a download="canvas.jpg" href="" onclick="downloadPicture(this)">скачать</a>
+	</button>
+<script>
+
+	var  x;
+	var  y;
+    var example = document.getElementById('example');
+   	canvas = example.getContext('2d');
+    canvas.height = window.screen.height;
+	canvas.width = window.screen.width;
+
+	//canvas.strokeRect(2,2, 600 ,110);
+
+
+document.onmousemove = function(event) {
+		console.log(event.buttons);
+		var x1 = event.clientX;
+		var y1 = event.clientY;
+
+		if(event.buttons == 1 ){
+		canvas.beginPath();
+		canvas.moveTo(x, y);
+		canvas.lineTo(x1,y1);
+		canvas.stroke();
+		} 
+		x = x1;
+		y = y1;
+		
+	}
+
+	var t2 = document.getElementById('t1');
+
+	downloadPicture = function(pic) {
+		var image = example.toDataURL("image/jpg");
+		pic.href = image;
+	}
+
+//1000/33 = ~30 veces por segundo
+//ctx.isPointInPath(20, 50) - проверка точки
+</script>
+<script type="text/javascript">
+	var  x20=-25;
+	var  y20=0;
+	var  xDirect=25;
+	var	 yDirect=0;
+	var i = 25;
+    var example = document.getElementById('example');
+   	
+    var arr1 = [
+    {x20: 0, y20:0},
+    {x20: 0, y20:0},
+    {x20: 0, y20:0},
+    {x20: 0, y20:0},
+    {x20: 0, y20:0},
+    {x20: 0, y20:0},
+    ];
+
+    canvas.height = 1000;
+	canvas.width = 1000;
+	
+	setInterval(() => {
+			console.log(arr1[0].x20);
+			console.log('*',x20,y20);
+			x20 = x20 + xDirect;
+			y20 = y20 + yDirect;
+			arr1.unshift({x20: x20, y20:y20});
+			arr1.pop();
+			canvas.clearRect(0,0,1000,1000)
+			for (var m=0; m < arr1.length; m++){
+				;
+				canvas.beginPath()
+				canvas.rect(arr1[m].x20,arr1[m].y20,i,i);
+				canvas.strokeStyle = '#000000';
+				canvas.stroke();
+
+			}
+			
+
+		
+			
+
+		
+	}, 150);
+	
+function press(e){
+	 
+	
+	switch (e.key) {
+		case "ArrowLeft":
+			console.log(e.key);
+			yDirect = 0;
+			xDirect = (-25);
+
+			
+			break;
+		case "ArrowRight":
+			console.log(e.key);
+			yDirect = 0;
+			xDirect = 25;
+			break;
+		case "ArrowUp":
+			console.log(e.key);
+			yDirect = (-25);
+			xDirect = 0;
+			break;
+		case "ArrowDown":
+			console.log(e.key);
+			yDirect = 25;
+			xDirect = 0;
+			break;
+	}
+
+}
+
+
+
+
+document.body.addEventListener('keydown', press);
+
+</script>
+
+
+</body>
+</html>
+

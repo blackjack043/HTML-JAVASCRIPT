@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+	<canvas height="760" width="1280" id='example'>Обновите браузер</canvas> <br>
+	<button>
+	<a download="canvas.jpg" href="" onclick="downloadPicture(this)">скачать</a>
+	</button>
+<script>
+
+	var  x;
+	var  y;
+    var example = document.getElementById('example');
+   	canvas = example.getContext('2d');
+    canvas.height = window.screen.height;
+	canvas.width = window.screen.width;
+
+	//canvas.strokeRect(2,2, 600 ,110);
+
+
+document.onmousemove = function(event) {
+		console.log(event.buttons);
+		var x1 = event.clientX;
+		var y1 = event.clientY;
+
+		if(event.buttons == 1 ){
+		canvas.beginPath();
+		canvas.moveTo(x, y);
+		canvas.lineTo(x1,y1);
+		canvas.stroke();
+		} 
+		x = x1;
+		y = y1;
+		
+	}
+
+	var t2 = document.getElementById('t1');
+
+	downloadPicture = function(pic) {
+		var image = example.toDataURL("image/jpg");
+		pic.href = image;
+	}
+
+//1000/33 = ~30 veces por segundo
+
+</script>
+</body>
+</html>
+
